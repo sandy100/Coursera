@@ -1,0 +1,24 @@
+#header .navbar ul li a:hover {
+    background: #E0E0E0;
+}
+#main{
+    background: #6F909D;
+    overflow: hidden;
+}
+.main-title h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.main-title a {
+    color: #FFF;
+}
+
+.main-title p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#slide1 {
+    padding: 100px 0;
+}

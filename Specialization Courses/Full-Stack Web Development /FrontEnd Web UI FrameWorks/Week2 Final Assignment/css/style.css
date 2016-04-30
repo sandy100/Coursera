@@ -1,0 +1,36 @@
+.mainNav {
+    background: #2F3EA1;
+    border: none;
+}
+
+.jumbotron {
+    background: #7483CD;
+    color: #FFF;
+}
+
+.jumbotron h1 {
+    margin: 120px 0;
+}
+.mainNav.navbar-inverse .navbar-toggle{
+	border-color:#1D2480;
+}
+.mainNav.navbar-inverse .navbar-nav > .active > a,
+.mainNav.navbar-inverse .navbar-nav > .active > a:hover,
+.mainNav.navbar-inverse .navbar-nav > .active > a:focus,
+.mainNav.navbar-inverse .navbar-toggle:hover,
+.mainNav.navbar-inverse .navbar-toggle:focus {
+    background: #1D2480;
+}
+
+.mainContent .contentDetail {
+    margin: 80px 0;
+}
+
+.breadcrumb .active a {
+    color: #777;
+}
+
+.row-footer {
+    background: #AEAEAE;
+    padding: 30px 0;
+}

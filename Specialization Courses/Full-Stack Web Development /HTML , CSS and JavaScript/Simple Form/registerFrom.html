@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dating Site SignUp Form</title>
+    <style>
+    fieldset {
+        background: lightyellow;
+        border: 10px solid yellow;
+        margin: 0 0 10px;
+        width: 720px;
+    }
+    
+    fieldset label,
+    .selectOptions span {
+        width: 180px;
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+        margin: 0 0 20px;
+    }
+    
+    fieldset label:hover,
+    input:hover,
+    .selectOptions span:hover {
+        font-size: 20px
+    }
+    
+    .selectOptions label {
+        width: auto;
+    }
+    
+    fieldset textarea {
+        width: 360px;
+        height: 50px;
+    }
+    
+    .leftlabel,
+    .rightlabel {
+        display: inline-block;
+        width: 50px;
+        padding: 2px;
+        text-align: center;
+        vertical-align: top;
+    }
+    
+    .leftlabel {
+        background-color: red;
+        color: white;
+    }
+    
+    .rightlabel {
+        background-color: purple;
+        color: white;
+    }
+    </style>
+</head>
+
+<body>
+    <form action="https://ihome.ust.hk/~rossiter/cgi-bin/show_everything.php" method="post" enctype="multipart/form-data">
+        <h2>Please Enter Your Details For Our Dating Website!</h2>
+        <fieldset>
+            <legend>Your Face</legend>
+            <div>
+                <div>
+                    <label for="avatar">Your Image: </label>
+                    <input type="file" id="avatar" value="profileImage" required>
+                </div>
+                <div>
+                    <label>Image Preview: </label>
+                    <img src="" alt="Selected Image" id="preview">
+                </div>
+        </fieldset>
+        <fieldset>
+            <label for="userName"> Name: </label>
+            <input type="text" id="userName" name="userName" required>
+            <legend>Your General Details</legend>
+            <div class="selectOptions">
+                <span>Gender: </span>
+                <input type="radio" id="male" placeholder="Your Full Name" name="gender" value="male" required>
+                <label for="male"> Male</label>
+                <input type="radio" name="gender" value="female" id="female">
+                <label for="female"> Female</label>
+            </div>
+            <div>
+                <label for="age"> Age: </label>
+                <input type="number" id="age">
+            </div>
+            <div>
+                <label for="dob"> Date Of Birth: </label>
+                <input type="date" id="dob">
+            </div>
+            <div>
+                <label for="color">Favorite Color: </label>
+                <input type="color" id="color">
+            </div>
+            <div>
+                <label for="selectCountry"> Which Country: </label>
+                <select name="countryName" id="selectCountry">
+                    <option value="Nepal">Nepal</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                    <option value=" Bhutan">Bhutan</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Afganistan">Afganistan</option>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Your Indicators</legend>
+            <br>
+            <label for="height">Height:</label>
+            <span class="leftlabel">Short</span>
+            <input type="range" id="height" name="height" min="0" max="100"><span class="rightlabel">Tall</span>
+            <br>
+            <label for="salary" class="margin">Salary:</label>
+            <span class="leftlabel">Poor</span>
+            <input type="range" id="salary" name="salary" min="0" max="100"><span class="rightlabel">Rich</span>
+        </fieldset>
+        <fieldset>
+            <legend>Your Contact Information</legend>
+            <div>
+                <label for="email">Email: </label>
+                <input type="email" id="email">
+            </div>
+            <div>
+                <label for="phone">Mobile: </label>
+                <input type="tel" id="phone">
+            </div>
+            <div>
+                <label for="address">Address: </label>
+                <textarea name="" id="address" cols="30" rows="3"></textarea>
+            </div>
+            <div class="selectOptions">
+                <span>Method to contact you</span>
+                <input type="checkbox" value="Email" id="contactEmail">
+                <label for="contactEmail">Email</label>
+                <input type="checkbox" value="whatsApp" id="whatsApp">
+                <label for="whatsApp">Whatsapp</label>
+                <input type="checkbox" value="Chat" id="chat">
+                <label for="chat">In-app chat</label>
+            </div>
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>
+    <script src="https://www.cse.ust.hk/~rossiter/dating_web_site.js"></script>
+</body>
+
+</html>
