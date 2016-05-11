@@ -1,0 +1,23 @@
+#wrapper{
+	min-height: 500px;
+}
+#wrapper .navbar {
+    background: #2f4050;
+    border-radius: 0;
+    border-width: 1px 0;
+}
+
+#wrapper .navbar ul li a {
+    color: #FFF;
+}
+
+#wrapper .navbar.navbar-default .navbar-nav > .active > a,
+#wrapper .navbar.navbar-default .navbar-nav > .active > a:hover,
+#wrapper .navbar.navbar-default .navbar-nav > .active > a:focus{
+	background: #16a085;
+}
+
+.footer{
+	background: #2f4050;
+	padding: 10px 0;
+}
