@@ -1,0 +1,51 @@
+/* CSS declarations go here */
+.hidden_div{
+	display:none;
+}
+
+.goToDetails :hover{
+    cursor:pointer;
+}
+
+.addPad {
+    padding-bottom:20px;
+}
+
+.icon {
+    width: 30px;
+}
+
+body {
+    padding-top: 70px;
+    background-image: url("river.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.screenCentered {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.panel {
+    opacity: 0.9;
+}
+
+.glyphicon-thumbs-up {
+    font-size: 20px;
+    padding-right: 10px;
+}
+.glyphicon-thumbs-down {
+    font-size: 20px;
+    padding-right: 10px;
+}
+.votesText {
+    font-size: 20px;
+}
+
+.transparant {
+	opacity: 0.3;
+}

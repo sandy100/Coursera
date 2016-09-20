@@ -1,0 +1,137 @@
+<head>
+  <title>Site Ace</title>
+</head>
+
+<body></body>
+
+<template name="ApplicationLayout">
+	{{> yield "navbar"}}
+	{{> yield "main"}}	  
+</template>
+
+<template name="welcome">
+  	<div class="container">
+    	<div class="jumbotron">
+      		<h1>Welcome to Site Ace {{username}}!</h1>
+      		<a href="/websites" class="btn btn-info">ENTER</a>
+    	</div>
+  	</div>
+</template> 
+
+<template name="navbar">
+	<nav class="navbar navbar-default navbar-fixed-top">
+  		<div class="container">
+   			{{> loginButtons}}
+  		</div>
+	</nav>
+</template>
+
+
+<template name="website_form">
+	<div class="modal fade" id="website_form">	
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<div class="modal-title">
+	        		</div>
+	      		</div>
+	      		<div class="modal-body">  
+					<form class="js-save-website-form">
+					  <div class="form-group">
+					    <label for="url">Site address</label>
+					    <input type="text" name="url" class="form-control" id="url" placeholder="http://www.mysite.com">
+					  </div>
+					  <div class="form-group">
+					    <label for="title">Title</label>
+					    <input type="text" name="title" class="form-control" id="title" placeholder="Mysite">
+					  </div>
+					    <div class="form-group">
+					    <label for="description">Description</label>
+					    <input type="text" name="description" class="form-control" id="description" placeholder="I found this site really useful for ...">
+					  </div>
+
+					  <button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+	      		<div class="modal-footer">
+	        		<button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+	      		</div>  
+	      	</div>
+	    </div>
+	</div>
+</template>
+
+<!-- template that displays several website items -->
+<template name="website_list">
+	<div class="container js-container" >
+		 {{#if currentUser}}
+  			<a class="btn btn-default js-toggle-website-form" href="#">
+		  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</a>
+			{{> website_form}}
+  		{{/if}}
+		<ul class="list-group">
+			{{#each websites}}
+				{{> website_item}}
+			{{/each}}
+		</ul>
+	</div>
+</template>
+
+
+<!-- template that displays individual website entries -->
+<template name="website_item">
+	<li class="list-group-item"><span class="badge">{{upVotes}}</span>
+		<h2><a href="{{url}}">{{title}}</a></h2>
+		<p>
+			{{description}}
+		</p>
+		<p>
+			Added {{timeAgo createdOn}}
+		</p>
+		<a href="#" class="btn btn-default {{upvotedClass}}">
+			{{upVotes}} <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+		</a>
+		<a href="#" class="btn btn-default {{downvotedClass}}">
+			<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span> {{downVotes}}
+		</a>
+		<p><br/>
+			<a href="/website/{{_id}}" class="btn btn-primary">View Details</a>
+  		</p>
+		<!-- you will be putting your up and down vote buttons in here! -->
+	</li>
+</template>
+
+<template name="website">
+  	<div class="container">
+	  	<h2><a href="{{url}}">{{title}}</a></h2>
+		<p>
+			{{description}}
+		</p>
+		{{#if hasComments}}
+			<ul class="media-list">
+				{{#each comments}}
+					<li class="media">
+						<a class="media-left" href="#"><img src="http://placehold.it/64x64"></a>
+						<div class="media-body">
+          					<h4 class="media-heading">{{createdBy}} commented on this {{timeAgo createdAt}}:</h4>
+          					<p>{{text}}</p>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		{{/if}}	
+		<p>
+			<form class="js-website-comment">
+			  	<div class="form-group">
+			    	<label for="comment">Add comment</label>
+			    	<textarea name="comment" class="form-control js-comment-box" id="comment" rows="3"></textarea>		    
+			  	</div>
+				<button type="submit" class="btn btn-default js-comment-btn">Post as {{username}}</button>
+				<input type="hidden" name="createdBy" id="createdBy" value="{{username}}">
+			</form>
+		</p>
+
+
+	</div>
+</template>
