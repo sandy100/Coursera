@@ -1,13 +1,13 @@
-<body class="container">
+<body>
     {{>header}}
-    {{>nicknameForm}}
-    {{>messageList}}
+    {{>loginButtons}}
     {{>messageForm}}
+    {{>messageList}}
 </body>
 
 
 <template name="header">
-    <h1>Welcome to M-Instant {{nickname}}</h1>
+    <h1>Welcome to M-Instant v3 {{nickname}}</h1>
 </template>
 
 <template name="messageList">
@@ -17,16 +17,8 @@
 </template>
 
 <template name="messageItem">
-    <h3>{{nickname}} - {{messageText}}</h3>
-</template>
-
-<template name="nicknameForm">
-    <div class="form-group">
-        <label for="nickname-input">Nickname:</label>
-        <input type="text" class="form-control" id="nickname-input" placeholder="Type message here...">
-        <button type="submit" class="btn btn-default js-set-nickname">Set my nickname!</button>
-
-    </div>
+    <h3><button class="btn btn-warning js-del-message">delete</button>{{nickname}} - {{messageText}}</h3>
+    <br/>{{createdOn}}
 </template>
 
 <template name="messageForm">

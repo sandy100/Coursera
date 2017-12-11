@@ -7,7 +7,8 @@ if (Meteor.isClient){
             var nickname = $('#nickname-input').val();
             // HERE is where you come in -
             // can you save the nickname onto the session?
-            // ... put something in here!
+            Session.set('nickname', nickname);
+
         }
     });
 
