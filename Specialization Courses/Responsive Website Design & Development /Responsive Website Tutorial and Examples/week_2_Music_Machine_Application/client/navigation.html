@@ -1,0 +1,24 @@
+<!--//client/navigation.html -->
+
+<template name="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <div class="navbar-brand" href="#">
+	        Machina Musica 15
+	      </div>
+	      <p class="navbar-text">
+	      		 <button class="btn btn-default startButton">
+						{{#if startdac}}<i class="fa fa-stop"></i> Stop All
+						{{ else }}<i class="fa fa-play"></i> Play All
+						{{/if }}
+					</button>
+<!--
+					<strong>Speed: {{sliderVal1}}</strong>
+					<div id="slider1" class="slider"></div>
+-->
+	      </p>
+	    </div>
+	  </div>
+	</nav>
+</template>

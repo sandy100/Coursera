@@ -1,0 +1,174 @@
+<template name="playground">
+
+<div class="gap-medium"></div>
+<!-- Remember - if you want to control functions globaly, don't declare them as var. Just name them. -->
+
+<div class="container">
+<div class="row">
+	<!-- track 1 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 1: Drums</strong> <br>
+				<button class="btn btn-default myButton1">ON</button>
+				<button class="btn btn-default myButton2">OFF</button><br>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume1}}</p>
+				<div id="sliderVol1" class="slider"></div>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed1}}</p>
+				<div id="sliderSpeed1" class="slider"></div>
+			</div>
+		</div><!-- end row -->
+	</div>
+
+	<!-- track 2 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 2: Bassline</strong><br>
+				<button class="btn btn-default myButton3">ON</button>
+				<button class="btn btn-default myButton4">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume2}}</p>
+				<div id="sliderVol2" class="slider"></div>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed2}}</p>
+				<div id="sliderSpeed2" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+
+	<!-- track 3 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 3: Arpeggio</strong><br>
+				<button class="btn btn-default myButton5">ON</button>
+				<button class="btn btn-default myButton6">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume3}}</p>
+				<div id="sliderVol3" class="slider"></div>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed3}}</p>
+				<div id="sliderSpeed3" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+
+	<!-- track 4 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 4: Vibes</strong><br>
+				<button class="btn btn-default btn4On">ON</button>
+				<button class="btn btn-default btn4Off">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume4}}</p>
+				<div id="sliderVol4" class="slider"></div>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed4}}</p>
+				<div id="sliderSpeed4" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+</div> <!-- end row 1 -->
+
+<div class="row"> <!-- row 2 -->
+
+	<!-- track 5 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 5: Snare</strong><br>
+				<button class="btn btn-default btn5On">ON</button>
+				<button class="btn btn-default btn5Off">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume5}}</p>
+				<div id="sliderVol5" class="slider"></div>
+			  <br>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed5}}</p>
+				<div id="sliderSpeed5" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+
+<!-- track 6 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 6: Chords</strong><br>
+				<button class="btn btn-default btn6On">ON</button>
+				<button class="btn btn-default btn6Off">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume6}}</p>
+				<div id="sliderVol6" class="slider"></div>
+			  <br>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed6}}</p>
+				<div id="sliderSpeed6" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+
+<!-- track 7 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 7: Drum2</strong><br>
+				<button class="btn btn-default btn7On">ON</button>
+				<button class="btn btn-default btn7Off">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume7}}</p>
+				<div id="sliderVol7" class="slider"></div>
+			  <br>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed7}}</p><br>
+				<div id="sliderSpeed7" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+
+<!-- track 8 -->
+	<div class="col-xs-6 col-sm-3 col-md-3">
+		<div class="row gap-small">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<strong>Track 8: Cymbal</strong><br>
+				<button class="btn btn-default btn8On">ON</button>
+				<button class="btn btn-default btn8Off">OFF</button>
+			</div>
+			<div class="col-xs-5 col-sm-5 col-md-5">
+				<p class="label">VOL: {{sliderVolume8}}</p>
+				<div id="sliderVol8" class="slider"></div>
+			  <br>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7">
+				<p class="label">SPEED: {{sliderSpeed8}}</p>
+				<div id="sliderSpeed8" class="slider"></div>
+			</div>
+		</div><!-- end inner row -->
+	</div><!-- end outter col -->
+
+
+</div> <!-- end row 2 -->
+
+ <h2> {{startdac}} {{drums}} {{bass}} {{arp}} {{vibes}} {{chords}} {{drum2}} {{cymbal}} </h2>
+
+</div><!-- end container -->
+
+</template>
