@@ -1,0 +1,43 @@
+{
+	"description": "NativeScript Application",
+	"license": "SEE LICENSE IN <your-license-filename>",
+	"readme": "NativeScript Application",
+	"repository": "<fill-your-repository-here>",
+	"nativescript": {
+		"id": "org.nativescript.conFusion",
+		"tns-android": {
+			"version": "4.2.0"
+		}
+	},
+	"dependencies": {
+		"@angular/animations": "~4.4.1",
+		"@angular/common": "~4.4.1",
+		"@angular/compiler": "~4.4.1",
+		"@angular/core": "~4.4.1",
+		"@angular/forms": "~4.4.1",
+		"@angular/http": "~4.4.1",
+		"@angular/platform-browser": "~4.4.1",
+		"@angular/router": "~4.4.1",
+		"font-awesome": "^4.7.0",
+		"nativescript-angular": "~4.4.0",
+		"nativescript-camera": "^4.0.2",
+		"nativescript-couchbase": "^1.0.18",
+		"nativescript-email": "^1.5.3",
+		"nativescript-imagepicker": "^4.0.1",
+		"nativescript-local-notifications": "^2.0.5",
+		"nativescript-ngx-fonticon": "^4.0.0",
+		"nativescript-phone": "^1.3.1",
+		"nativescript-social-share": "^1.5.0",
+		"nativescript-telerik-ui": "^3.1.4",
+		"nativescript-theme-core": "~1.0.2",
+		"nativescript-toasty": "^1.1.5",
+		"reflect-metadata": "~0.1.8",
+		"rxjs": "~5.4.2",
+		"tns-core-modules": "~3.3.0",
+		"zone.js": "~0.8.2"
+	},
+	"devDependencies": {
+		"nativescript-dev-typescript": "~0.5.0",
+		"typescript": "~2.4.2"
+	}
+}
