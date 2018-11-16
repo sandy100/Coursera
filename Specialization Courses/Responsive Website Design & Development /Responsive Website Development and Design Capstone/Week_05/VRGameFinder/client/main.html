@@ -1,0 +1,526 @@
+<head>
+  <title>VRGameFinder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+
+
+
+
+<template name="layout">
+  {{> Template.dynamic template=header}}
+  {{> Template.dynamic template=main}}
+  {{> Template.dynamic template=footer}}
+</template>
+
+
+
+
+<template name="navbar">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header navbar-right">
+
+        <!-- Search button -->
+        <button type="button" class="btn btn-default navbar-btn js-search-button" data-toggle="modal" data-target="#js-search-modal" data-tooltip="true" data-placement="bottom" title="search titles">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+
+        <!-- Collapsed toggle button -->
+        <button type="button" class="navbar-toggle collapsed js-navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-links" aria-expanded="false" data-tooltip="true" data-placement="bottom" title="filter titles">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <!-- Nav links for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse-links">
+        <ul class="nav navbar-nav whitespace-fix">
+          <li><p class="navbar-text">Headset:</p></li>
+          <li><a href="#" class="js-headset" data-toggle="tooltip" data-placement="auto bottom" title="">Rift</a></li>
+          <li><a href="#" class="js-headset" data-toggle="tooltip" data-placement="auto bottom" title="">Vive</a></li>
+          <li><p class="navbar-text">Controller:</p></li>
+          <li><a href="#" class="js-gamepad" data-toggle="tooltip" data-placement="auto bottom" title="">Gamepad</a></li>
+          <li><a href="#" class="js-motion" data-toggle="tooltip" data-placement="auto bottom" title="">Motion</a></li>
+          <li class="multiline"><a href="#" class="js-kbm" data-toggle="tooltip" data-placement="auto bottom" title="">Keyboard<span> &amp; Mouse</span></a></li>
+          <li><p class="navbar-text">Genre:</p></li>
+          <li><a href="#" class="js-singleplayer" data-toggle="tooltip" data-placement="auto bottom" title="">Singleplayer</a></li>
+          <li><a href="#" class="js-multiplayer" data-toggle="tooltip" data-placement="auto bottom" title="">Multiplayer</a></li>
+        </ul>
+      </div><!-- /Nav links -->
+    </div><!-- /Container -->
+  </nav>
+
+  <!-- Filters -->
+  {{> vr_filters}}
+
+
+  <!-- Search modal -->
+  <div class="modal fade bs-example-modal-sm" id="js-search-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <form role="search" id="search_form">
+          <input type="text" class="form-control" placeholder="Search" id="search_input" autocomplete="off">
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</template>
+
+
+
+
+<template name="vr_filters">
+  {{#if getSession}}
+  <div class="container-fluid">
+    <div class="well well-sm">
+      <h4>
+      <span class="hidden-xs hidden-sm">Showing Results Filtered By</span>
+      <span class="hidden-xs hidden-md hidden-lg">Showing Filtered Results</span>
+      <span class="hidden-sm hidden-md hidden-lg">Filtered Results</span>
+      {{{getFilters}}}
+      {{{getSearch}}}
+      <a href="#" class="js-reset-filters label label-warning" title="Reset All Filters"><i class="fa fa-close fa-lg" aria-hidden="true"></i> Reset<span class="hidden-xs"> All</span></a>
+      </h4>
+    </div>
+  </div>
+  {{/if}}
+</template>
+
+
+
+
+<template name="vr_list">
+  <!-- VR List -->
+  <div class="container-fluid">
+
+    {{#unless currentUser}}
+    <div class="row">
+      <div class="col-md-5 col-sm-6 col-xs-2">
+        <h3>Title</h3>
+      </div>
+
+      <div class="col-md-4 col-sm-3 col-xs-4 text-center dynamic-center">
+        <h3>Features</h3>
+      </div>
+
+      <div class="col-md-3 col-sm-3 col-xs-6 text-center">
+        <h3>Store</h3>
+      </div>
+    </div>
+
+      {{#each supported_title}}
+        {{> vr_title}}
+      {{/each}}
+
+    {{else}}
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Administration Page - {{getUsername}}</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 col-sm-8">
+        <p>Edit existing titles below, delete titles - or create new titles.  <br>New titles will be saved as drafts until they are 'published' to the public site.</p>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+
+        <button type="button" class="btn btn-default btn-block js-new-title">
+          <i class="fa fa-file fa-lg" aria-hidden="true"></i> New Title
+        </button>
+
+      </div>
+    </div>
+      {{#each supported_title}}
+      <div id="vr_admin_list">
+        {{> vr_admin_title}}
+      </div>
+      {{/each}}
+    {{/unless}}
+  </div>
+  <!-- End VR List -->
+</template>
+
+
+
+
+<template name="vr_title">
+  <!-- Title -->
+  <!-- Seperator row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <hr>
+    </div>
+  </div>
+
+  <!-- Title Details -->
+  <div class="row">
+    <div class="col-md-5 col-sm-6 col-xs-12">
+      <h4>{{title}}</h4>
+    </div>
+
+    <div class="col-md-4 col-sm-3 col-xs-6 text-center dynamic-center feature-icons">
+
+    {{#if support_singleplayer}}
+      <a href="#" class="js-singleplayer">
+        <i class="fa fa-user fa-lg" aria-hidden="true" title="singleplayer"></i>
+      </a>
+    {{/if}}
+    {{#if support_multiplayer}}
+      <a href="#" class="js-multiplayer">
+        <i class="fa fa-users fa-lg" aria-hidden="true" title="multiplayer"></i>
+      </a>
+    {{/if}}
+    {{#if support_gamepad}}
+      <a href="#" class="js-gamepad">
+        <i class="fa fa-gamepad fa-lg" aria-hidden="true" title="supports gamepad"></i>
+      </a>
+    {{/if}}
+    {{#if support_motion}}
+      <a href="#" class="js-motion">
+        <i class="fa fa-hand-paper-o fa-lg" aria-hidden="true" title="supports motion controllers"></i>
+      </a>
+    {{/if}}
+    {{#if support_kbm}}
+      <a href="#" class="js-kbm">
+        <i class="fa fa-keyboard-o fa-lg" aria-hidden="true" title="supports keyboard and mouse"></i>
+      </a>
+    {{/if}}
+
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-xs-6 text-center remove-last-comma">
+
+      {{{getOculusLink support_rift support_vive rift_id}}}
+      {{{getSteamLink support_rift support_vive steam_id}}}
+
+    </div>
+  </div>
+  <!-- End Title -->
+
+</template>
+
+
+
+
+<template name="vr_admin_title">
+  <!-- Title -->
+  <!-- Seperator row -->
+  <div class="row title-seperator">
+    <div class="col-xs-12">
+      <br>
+      <hr>
+      <br>
+    </div>
+  </div>
+
+  <!-- Title Details -->
+  <div class="stretch title-details">
+    <!-- Span for jQuery -->
+    <span id="{{_id}}" class="bottom">
+
+      <div class="input-group">
+        <input type="text" class="form-control title-btn js-title js-change-input" data-original-value="{{title}}" placeholder="Enter the Title" value="{{title}}">
+
+        <span class="input-group-btn">
+          <button class="btn btn-danger js-delete-title" type="button">
+            <span class="glyphicon glyphicon-trash" aria-hidden="false"></span>
+            <span class="hidden-xs">Delete</span>
+          </button>
+        </span>
+
+        <span class="input-group-btn">
+          <button class="btn btn-default js-rename-title" type="button">Rename</button>
+        </span>
+      </div>
+
+
+      <div class="container-fluid">
+        <div class="row nopad">
+          <div class="col-xs-6 nopad">
+            <h4 class="nopad">{{#if draft}}Select Compatible {{/if}}Headsets</h4>
+          </div>
+
+          <div class="col-xs-6 text-right nopad">
+            <h4 class="nopad">{{#if draft}}Select {{/if}}Controllers &amp; Genres</h4>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Features -->
+      <div class="btn-toolbar sm" aria-label="Supported" id="features_{{_id}}">
+        <!-- Headsets -->
+        <div class="btn-group" data-toggle="buttons" aria-label="Headsets">
+          <label class="btn btn-primary js-toggle {{#unless support_rift}}active{{/unless}}" data-support="support_rift">
+            <input type="checkbox" autocomplete="off">Rift
+          </label>
+
+          <label class="btn btn-primary js-toggle {{#unless support_vive}}active{{/unless}}" data-support="support_vive">
+            <input type="checkbox" autocomplete="off">Vive
+          </label>
+        </div>
+
+        <!-- Controllers and Genres -->
+        <div class="btn-group pull-right" data-toggle="buttons" aria-label="Controllers and Genres">
+          <label class="btn btn-primary js-toggle {{#unless support_gamepad}}active{{/unless}}" data-support="support_gamepad">
+            <input type="checkbox" autocomplete="off">
+            <i class="fa fa-gamepad" aria-hidden="true" title="supports gamepad"></i>
+            <span class="hidden-xs hidden-sm">Gamepad</span>
+          </label>
+
+
+          <label class="btn btn-primary js-toggle {{#unless support_motion}}active{{/unless}}" data-support="support_motion">
+            <input type="checkbox" autocomplete="off" data-feature="support_motion">
+            <i class="fa fa-hand-paper-o" aria-hidden="true" title="supports motion controllers"></i>
+            <span class="hidden-xs hidden-sm">Motion</span>
+          </label>
+
+
+          <label class="btn btn-primary js-toggle {{#unless support_kbm}}active{{/unless}}" data-support="support_kbm">
+            <input type="checkbox" autocomplete="off">
+            <i class="fa fa-keyboard-o" aria-hidden="true" title="supports keyboard and mouse"></i>
+            <span class="hidden-xs hidden-sm">Keyboard &amp; Mouse</span>
+          </label>
+
+
+          <label class="btn btn-primary js-toggle {{#unless support_singleplayer}}active{{/unless}}" data-support="support_singleplayer">
+            <input type="checkbox" autocomplete="off">
+            <i class="fa fa-user" aria-hidden="true" title="singleplayer"></i>
+            <span class="hidden-xs hidden-sm">Singleplayer</span>
+          </label>
+
+
+          <label class="btn btn-primary js-toggle {{#unless support_multiplayer}}active{{/unless}}" data-support="support_multiplayer">
+            <input type="checkbox" autocomplete="off">
+            <i class="fa fa-users" aria-hidden="true" title="multiplayer"></i>
+            <span class="hidden-xs hidden-sm">Multiplayer</span>
+          </label>
+
+        </div>
+      </div> <!-- End features -->
+
+
+      <!-- Oculus Link -->
+      <label for="rift_id_{{_id}}">
+        <h4>Oculus (
+          <a href="https://www.oculus.com/experiences/rift/" target="_blank">Open Oculus Home
+          <span class="glyphicon glyphicon-share-alt" aria-hidden="false"></span></a> )
+        </h4>
+      </label>
+
+      <div class="input-group">
+        <span class="input-group-addon hidden-xs" id="basic-addon_{{_id}}">Oculus URL</span>
+        <input type="text" class="form-control js-change-input" id="rift_id_{{_id}}" aria-describedby="basic-addon3" data-original-value="{{#if rift_id}}https://www.oculus.com/experiences/rift/{{rift_id}}{{/if}}" value="{{#if rift_id}}https://www.oculus.com/experiences/rift/{{rift_id}}{{/if}}" placeholder="Enter URL from Oculus Home" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+        <span class="input-group-btn">
+          <button class="btn btn-primary js-open-link" type="button" data-target="rift_id_{{_id}}">
+            <span class="hidden-xs">Open</span>
+            <span class="glyphicon glyphicon-share-alt" aria-hidden="false"></span>
+          </button>
+        </span>
+
+        <span class="input-group-btn">
+          <button class="btn btn-default js-save-link" type="button" data-target="rift_id_{{_id}}">Save</button>
+        </span>
+      </div>
+
+
+      <!-- Steam Link -->
+      <label for="steam_id_{{_id}}">
+        <h4>Steam (
+          <a href="http://store.steampowered.com/" target="_blank">Open Steam Store
+          <span class="glyphicon glyphicon-share-alt" aria-hidden="false"></span></a> )
+        </h4>
+      </label>
+
+      <div class="input-group">
+        <span class="input-group-addon hidden-xs" id="basic-addon_{{_id}}">Steam URL</span>
+        <input type="text" class="form-control js-change-input" id="steam_id_{{_id}}" aria-describedby="basic-addon3" data-original-value="{{#if steam_id}}http://store.steampowered.com/app/{{steam_id}}{{/if}}" value="{{#if steam_id}}http://store.steampowered.com/app/{{steam_id}}{{/if}}" placeholder="Enter URL from Steam" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+        <span class="input-group-btn">
+          <button class="btn btn-primary js-open-link" type="button" data-target="steam_id_{{_id}}">
+            <span class="hidden-xs">Open</span>
+            <span class="glyphicon glyphicon-share-alt" aria-hidden="false"></span>
+          </button>
+        </span>
+
+        <span class="input-group-btn">
+          <button class="btn btn-default js-save-link" type="button" data-target="steam_id_{{_id}}">Save</button>
+        </span>
+      </div>
+
+      {{#if draft}}
+      <br>
+      <button type="button" class="btn btn-success btn-block js-publish-title">
+        <i class="fa fa-check fa-lg" aria-hidden="true"></i> Publish This Title
+      </button>
+      {{/if}}
+
+    </span>
+    <br>
+    <br>
+  </div>
+  <!--End Title -->
+
+</template>
+
+
+
+
+<template name="site_info">
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container-fluid">
+
+      <ul class="list-inline">
+        <li><a href="https://github.com/Jann3/VRGameFinder" target="_blank">GitHub</a></li>
+        <li><a href="https://twitter.com/Jann3" target="_blank">Twitter</a></li>
+
+        {{#if currentUser}}
+        <li><a href="#" class="js-logout">Logout</a></li>
+        {{else}}
+        <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+        {{/if}}
+
+        <li><a href="#" data-toggle="modal" data-target="#js-about-modal">About</a></li>
+      </ul>
+      <hr>
+      <p>Designed by Janne as part of an awesome <a href="https://www.coursera.org/specializations/website-development" target="_blank">Specialization in Web Development on Coursera</a>.</p>
+      <p>Oculus, Rift, Steam and Vive are trademarks of their respective owners.</p>
+
+    </div>
+  </footer>
+
+
+
+
+  <!-- About modal -->
+  <div class="modal fade" id="js-about-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title">Discovering Virtual-Reality<span class="hidden-xs"> games made easy</span>...</h3>
+          <p>VRGameFinder is a web app that lets gamers find<span class="hidden-xs"> compatible</span> VR games<span class="hidden-xs hidden-sm"> they can play from various online stores</span>.</p>
+        </div>
+        <div class="modal-body">
+          <h3 class="modal-title">Using VRGameFinder</h3>
+          <p>1) First <strong>Select your VR Headset</strong> - and VRGameFinder will find all the games you can play with it.</p>
+          <p>
+            <button type="button" class="btn {{#if isRift}}btn-success{{else}}btn-default{{/if}} js-set-rift">Select Oculus Rift</button>
+            <button type="button" class="btn {{#if isVive}}btn-success{{else}}btn-default{{/if}} js-set-vive">Select HTC Vive</button>
+          </p>
+          <p>2) You can <strong>Filter your results</strong> by selecting any <strong>Controllers</strong> you own, or any <strong>Genres</strong> you <span class="hidden-xs">wish to play</span><span class="hidden-sm hidden-md hidden-lg">want</span>.</p>
+          <p>3) <strong>Search</strong> for specific titles by clicking<span class="hidden-xs"> the Search icon.</span>
+            <button type="button" class="btn btn-default navbar-btn js-search-button" data-toggle="modal" data-target="#js-search-modal" data-dismiss="modal">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success js-browse{{#unless isRift}}{{#unless isVive}}  hidden{{/unless}}{{/unless}}" data-dismiss="modal"><span class="hidden-xs">Browse </span>Compatible Games</button>
+          <button type="button" class="btn btn-default js-browse-all" data-dismiss="modal"><span class="hidden-xs">Just </span>Browse All Games</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Login modal -->
+  <div class="modal fade js-modal" id="login-modal">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-title">Admin Login:</div>
+          </div>
+
+          <div class="modal-body">
+
+            <div id="login_inputs" class="form-group">
+              <form id="login_form" action="action">
+                <input type="text" class="form-control" id="login_email" placeholder="Username or Email">
+                <input type="password" class="form-control" id="login_password" placeholder="Password">
+                <button class="btn btn-success hidden" type="submit">Go</button>
+              </form>
+            </div>
+
+            <div id="form_error"></div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-success" type="submit" id="login_button">Login</button>
+            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Error modal -->
+  <div class="modal fade js-modal" id="error-modal">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-title">Unfortunately</div>
+          </div>
+
+          <div class="modal-body" id="error-modal-message">
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal">OK</button>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+   <!-- Div's for breakpoint detection -->
+  <div class="device-xs visible-xs"></div>
+  <div class="device-sm visible-sm"></div>
+  <div class="device-md visible-md"></div>
+  <div class="device-lg visible-lg"></div>
+
+  <script type="text/javascript">
+    $(function () {
+
+      // initialize tooltips
+      $('[data-toggle="tooltip"]').tooltip();
+
+      // initialize data-tooltip as tooltip (to allow data-toggle to open modal)
+      $('[data-tooltip="true"]').tooltip();
+
+    });
+
+  </script>
+
+  {{#unless currentUser}}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#js-about-modal').modal('show');
+    });
+  </script>
+  {{/unless}}
+</template>

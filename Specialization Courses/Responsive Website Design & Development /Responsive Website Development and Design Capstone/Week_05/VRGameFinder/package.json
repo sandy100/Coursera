@@ -1,0 +1,17 @@
+{
+  "name": "vrgamefinder",
+  "version": "1.0.0",
+  "description": "web application for discovering virtual reality games and experiences",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vr",
+    "game finder",
+    "gamer"
+  ],
+  "author": "sandy100"
+}
